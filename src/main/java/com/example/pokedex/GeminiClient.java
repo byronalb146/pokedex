@@ -23,7 +23,8 @@ public class GeminiClient {
         "- Si ocurre un error de comunicación con los downstream services coloca el siguiente \n" +
         "  mensaje: Ha ocurrido un error de comunicación, porfavor intenta mas tarde." +
         "- Si estas hablando de dinero coloca el símbolo de Quetzales (Q) antes de la cantidad.\n" +
-        "- Cuando des fechas, brindalas en forma de lista, osea una por línea\n";
+        "- Cuando des fechas, brindalas en forma de lista, osea una por línea.\n" +
+        "- Siempre responde con textos en formato Markdown.\n";
 
     private final Client client;
 
