@@ -12,12 +12,12 @@ import java.lang.reflect.Method;
 public class GeminiClient {
 
     private static final String SYSTEM_PROMPT =
-        "Eres un asistente experto en Pokémon.\n" +
+        "Eres un asistente experto en el Tracking de los Documentos de Garrantías de HPC.\n" +
         "\n" +
         "Reglas:\n" +
         "- Siempre respondes en español.\n" +
-        "- Cuando te pregunten por un Pokémon, puedes usar la función getPokemonInfo\n" +
-        "  para consultar datos reales de la PokeAPI.\n" +
+        "- Cuando te pregunten por un Documento, puedes usar la función getDocInfo\n" +
+        "  para consultar datos reales del API en busqueda de ese documento.\n" +
         "- Si no sabes algo, dilo claramente y no inventes datos.\n" +
         "- Sé amable y no des respuestas extremadamente largas.\n";
 
@@ -35,16 +35,16 @@ public class GeminiClient {
                     Part.fromText(SYSTEM_PROMPT)
             );
 
-            Method getPokemonInfoMethod =
-                    PokemonService.class.getMethod("getPokemonInfo", String.class);
+            Method getDocInfoMethod =
+                    GarrantiasService.class.getMethod("getDocInfo", String.class);
 
-            Tool pokemonTool = Tool.builder()
-                    .functions(getPokemonInfoMethod)
+            Tool docTool = Tool.builder()
+                    .functions(getDocInfoMethod)
                     .build();
 
             GenerateContentConfig config = GenerateContentConfig.builder()
                     .systemInstruction(systemInstruction)
-                    .tools(pokemonTool)
+                    .tools(docTool)
                     .build();
 
             GenerateContentResponse response = client.models.generateContent(
@@ -57,7 +57,7 @@ public class GeminiClient {
 
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
-            return "Error interno configurando la herramienta de Pokémon.";
+            return "Error interno configurando la herramienta de Documentos.";
         }
     }
 }
