@@ -20,34 +20,29 @@
     </properties>
 
     <dependencies>
-        <!-- REST / Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Tu HTTP client a PokeAPI -->
         <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
             <version>3.14.5</version>
         </dependency>
 
-        <!-- JSON si lo sigues usando -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
 
-        <!-- Gemini -->
         <dependency>
             <groupId>com.google.genai</groupId>
             <artifactId>google-genai</artifactId>
             <version>1.29.0</version>
         </dependency>
 
-        <!-- Para pruebas de Spring Boot si luego quieres -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -57,7 +52,6 @@
 
     <build>
         <plugins>
-            <!-- Necesario para que Gemini AFC lea los nombres de parámetros -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -67,7 +61,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Plugin de Spring Boot para ejecutar con mvn spring-boot:run -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

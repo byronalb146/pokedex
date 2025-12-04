@@ -31,12 +31,10 @@ public class GeminiClient {
 
     public String chat(String userMessage) {
         try {
-            // Instrucciones del sistema
             Content systemInstruction = Content.fromParts(
                     Part.fromText(SYSTEM_PROMPT)
             );
 
-            // Método que Gemini puede invocar como herramienta
             Method getPokemonInfoMethod =
                     PokemonService.class.getMethod("getPokemonInfo", String.class);
 
@@ -44,13 +42,11 @@ public class GeminiClient {
                     .functions(getPokemonInfoMethod)
                     .build();
 
-            // Config con system + tool
             GenerateContentConfig config = GenerateContentConfig.builder()
                     .systemInstruction(systemInstruction)
                     .tools(pokemonTool)
                     .build();
 
-            // Llamada al modelo (AFC decide si llama o no a getPokemonInfo)
             GenerateContentResponse response = client.models.generateContent(
                     "gemini-2.5-flash",
                     userMessage,

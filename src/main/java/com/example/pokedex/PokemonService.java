@@ -6,9 +6,6 @@ import kong.unirest.json.JSONArray;
 
 public class PokemonService {
 
-    /**
-     * Función que Gemini puede llamar como herramienta.
-     */
     public static String getPokemonInfo(String name) {
         try {
             JSONObject res = Unirest
