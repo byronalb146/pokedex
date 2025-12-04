@@ -8,8 +8,6 @@ public class GarrantiasService {
     private static final String API_URL =
             "https://warranty-tracker-yzqu.onrender.com/api/tracking/";
 
-    // ⚙️ Lee el API KEY desde una variable de entorno
-    // En tu SO:  set WARRANTY_TRACKER_API_KEY=TU_VALOR
     private static final String API_KEY =
             System.getenv("WARRANTY_TRACKER_API_KEY");
 
@@ -21,7 +19,7 @@ public class GarrantiasService {
 
             String body = Unirest
                     .get(API_URL + docname.toUpperCase())
-                    .header("x-api-key", API_KEY) // 👈 aquí va el API-KEY (ajusta el nombre del header si tu API usa otro)
+                    .header("x-api-key", API_KEY)
                     .asString()
                     .getBody();
 

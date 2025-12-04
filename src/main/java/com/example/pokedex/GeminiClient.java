@@ -19,7 +19,8 @@ public class GeminiClient {
         "- Cuando te pregunten por un Documento, puedes usar la función getDocInfo\n" +
         "  para consultar datos reales del API en busqueda de ese documento.\n" +
         "- Si no sabes algo, dilo claramente y no inventes datos.\n" +
-        "- Sé amable y no des respuestas extremadamente largas.\n";
+        "- Sé amable y no des respuestas extremadamente largas.\n" +
+        "- Si ocurre un error de comunicación con los downstream services coloca el siguiente mensaje: Ha ocurrido un error de comunicación, porfavor intenta mas tarde.\n";
 
     private final Client client;
 
