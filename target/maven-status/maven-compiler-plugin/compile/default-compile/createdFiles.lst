@@ -1,0 +1,6 @@
+com\example\pokedex\ChatController.class
+com\example\pokedex\dto\ChatResponse.class
+com\example\pokedex\PokemonService.class
+com\example\pokedex\dto\ChatRequest.class
+com\example\pokedex\PokedexApplication.class
+com\example\pokedex\GeminiClient.class
