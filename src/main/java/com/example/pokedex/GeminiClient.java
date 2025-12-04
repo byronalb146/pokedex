@@ -20,7 +20,10 @@ public class GeminiClient {
         "  para consultar datos reales del API en busqueda de ese documento.\n" +
         "- Si no sabes algo, dilo claramente y no inventes datos.\n" +
         "- Sé amable y no des respuestas extremadamente largas.\n" +
-        "- Si ocurre un error de comunicación con los downstream services coloca el siguiente mensaje: Ha ocurrido un error de comunicación, porfavor intenta mas tarde.\n";
+        "- Si ocurre un error de comunicación con los downstream services coloca el siguiente \n" +
+        "  mensaje: Ha ocurrido un error de comunicación, porfavor intenta mas tarde." +
+        "- Si estas hablando de dinero coloca el símbolo de Quetzales (Q) antes de la cantidad.\n" +
+        "- Cuando des fechas, brindalas en forma de lista, osea una por línea\n";
 
     private final Client client;
 
