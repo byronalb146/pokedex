@@ -11,37 +11,37 @@ import java.lang.reflect.Method;
 
 public class GeminiClient {
 
-    private static final String SYSTEM_PROMPT =
-        "Eres un asistente experto en el Tracking de los Documentos de Garrantías de HPC.\n" +
-        "\n" +
-        "Reglas:\n" +
-        "- Siempre respondes en español.\n" +
-        "- Cuando te pregunten por un Documento, puedes usar la función getDocInfo\n" +
-        "  para consultar datos reales del API en busqueda de ese documento.\n" +
-        "- Si no sabes algo, dilo claramente y no inventes datos.\n" +
-        "- Sé amable y no des respuestas extremadamente largas.\n" +
-        "- Si ocurre un error de comunicación con los downstream services coloca el siguiente \n" +
-        "  mensaje: Ha ocurrido un error de comunicación, porfavor intenta mas tarde." +
-        "- Si estas hablando de dinero coloca el símbolo de Quetzales (Q) antes de la cantidad.\n" +
-        "- Cuando des fechas, brindalas en forma de lista, osea una por línea.\n" +
-        "- Siempre responde con textos en formato Markdown.\n";
+    private static final String SYSTEM_PROMPT = "Eres un asistente experto en el Tracking de los Documentos de Garrantías de HPC.\n"
+            +
+            "\n" +
+            "Reglas:\n" +
+            "- Siempre respondes en español.\n" +
+            "- Cuando te pregunten por un Documento, puedes usar la función getDocInfo\n" +
+            "  para consultar datos reales del API en busqueda de ese documento.\n" +
+            "- Si no sabes algo, dilo claramente y no inventes datos.\n" +
+            "- Sé amable y no des respuestas extremadamente largas.\n" +
+            "- Si ocurre un error de comunicación con los downstream services coloca el siguiente \n" +
+            "  mensaje: Ha ocurrido un error de comunicación, porfavor intenta mas tarde." +
+            "- Si estas hablando de dinero coloca el símbolo de Quetzales (Q) antes de la cantidad.\n" +
+            "- Cuando des fechas, brindalas en forma de lista, osea una por línea.\n" +
+            "- Siempre responde con textos en formato Markdown.\n" +
+            "- En la respuesta unicamente brinda información del sku, numero de ticket y el ultimo status" +
+            "  Para mas informacion lista las opciones que tiene el usuario. Y el usuario deberia mandarte las opciones que desea.\n";
 
     private final Client client;
 
     public GeminiClient() {
         this.client = Client.builder()
-            .apiKey(System.getenv("GOOGLE_API_KEY"))
-            .build();
+                .apiKey(System.getenv("GOOGLE_API_KEY"))
+                .build();
     }
 
     public String chat(String userMessage) {
         try {
             Content systemInstruction = Content.fromParts(
-                    Part.fromText(SYSTEM_PROMPT)
-            );
+                    Part.fromText(SYSTEM_PROMPT));
 
-            Method getDocInfoMethod =
-                    GarrantiasService.class.getMethod("getDocInfo", String.class);
+            Method getDocInfoMethod = GarrantiasService.class.getMethod("getDocInfo", String.class);
 
             Tool docTool = Tool.builder()
                     .functions(getDocInfoMethod)
@@ -55,8 +55,7 @@ public class GeminiClient {
             GenerateContentResponse response = client.models.generateContent(
                     "gemini-2.5-flash",
                     userMessage,
-                    config
-            );
+                    config);
 
             return response.text();
 
