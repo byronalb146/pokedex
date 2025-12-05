@@ -1,11 +1,19 @@
-# Compiled class files
+# --- Java / Maven ---
+# Clases compiladas
 *.class
 
-# Log files
-*.log
-logs/
+# Artefactos / builds
+target/
+*/target/
+build/
+out/
+dist/
 
-# Package files
+# Fuentes generadas
+target/generated-sources/
+generated-sources/
+
+# Paquetes
 *.jar
 *.war
 *.nar
@@ -14,19 +22,16 @@ logs/
 *.tar.gz
 *.rar
 
-# Maven
-target/
-*/target/
+# Logs
+*.log
+logs/
 
-# Maven generated sources
-target/generated-sources/
-generated-sources/
+# Cobertura
+jacoco.exec
+coverage/
 
-# Build directories
-build/
-out/
-
-# IntelliJ IDEA
+# --- IDEs ---
+# IntelliJ
 .idea/
 *.iml
 *.iws
@@ -39,31 +44,21 @@ out/
 .project
 .settings/
 
-# OS files
+# --- Sistema Operativo ---
 Thumbs.db
 .DS_Store
 
-# Temporary files
+# --- Varios / backups ---
 *~
 *.swp
+*.orig
 
-# Docker
+# --- Docker / config sensibles ---
 .env
 docker-compose.override.yml
 docker-compose.*.yml
 
-# Test coverage
-jacoco.exec
-coverage/
-
-# JVM crash logs
-hs_err_pid*
-
-# Distribution artifacts
-*.egg-info/
-dist/
-
-# Backup and release files
+# Maven release / versiones
 release.properties
 dependency-reduced-pom.xml
 pom.xml.tag
@@ -72,5 +67,5 @@ pom.xml.versionsBackup
 pom.xml.next
 buildNumber.properties
 
-# Others
-*.orig
+# Python / otros empaques (por si acaso)
+*.egg-info/
