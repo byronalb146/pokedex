@@ -9,11 +9,13 @@ import com.google.genai.types.Part;
 import com.google.genai.types.Tool;
 
 import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GeminiClient {
 
-    private static final String SYSTEM_PROMPT =
-            "Eres un asistente experto en el Tracking de los Documentos de Garrantías de HPC.\n" +
+    private static final String SYSTEM_PROMPT = "Eres un asistente experto en el Tracking de los Documentos de Garrantías de HPC.\n"
+            +
             "\n" +
             "Reglas:\n" +
             "- Siempre respondes en español.\n" +
@@ -30,7 +32,9 @@ public class GeminiClient {
             "  Para mas informacion lista las opciones que tiene el usuario. Y el usuario deberia mandarte las opciones que desea.\n";
 
     private final Client client;
-    private final Chat chatSession;
+    private final GenerateContentConfig config;
+
+    private final Map<String, Chat> chatSessions = new ConcurrentHashMap<>();
 
     public GeminiClient() {
         this.client = Client.builder()
@@ -45,24 +49,26 @@ public class GeminiClient {
                     .build();
 
             Content systemInstruction = Content.fromParts(
-                    Part.fromText(SYSTEM_PROMPT)
-            );
+                    Part.fromText(SYSTEM_PROMPT));
 
-            GenerateContentConfig config = GenerateContentConfig.builder()
+            this.config = GenerateContentConfig.builder()
                     .systemInstruction(systemInstruction)
                     .tools(docTool)
                     .build();
-
-            this.chatSession = client.chats.create("gemini-2.5-flash", config);
 
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Error interno configurando la herramienta de Documentos.", e);
         }
     }
 
-    public String chat(String userMessage) {
+    private Chat getOrCreateChat(String id) {
+        return chatSessions.computeIfAbsent(id, key -> client.chats.create("gemini-2.5-flash", config));
+    }
+
+    public String chat(String id, String userMessage) {
         try {
-            GenerateContentResponse response = chatSession.sendMessage(userMessage);
+            Chat chat = getOrCreateChat(id);
+            GenerateContentResponse response = chat.sendMessage(userMessage);
             return response.text();
         } catch (Exception e) {
             e.printStackTrace();

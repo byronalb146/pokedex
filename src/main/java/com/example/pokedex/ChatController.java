@@ -16,7 +16,7 @@ public class ChatController {
 
     @PostMapping("/chat")
     public ChatResponse chat(@RequestBody ChatRequest request) {
-        String reply = geminiClient.chat(request.getMessage());
+        String reply = geminiClient.chat(request.getId(), request.getMessage());
         return new ChatResponse(reply);
     }
 }
