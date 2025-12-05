@@ -29,7 +29,7 @@ public class GeminiClient {
             "- Cuando des fechas, brindalas en forma de lista, osea una por línea.\n" +
             "- Siempre responde con textos en formato Markdown.\n" +
             "- En la respuesta unicamente brinda información del sku, numero de ticket y el ultimo status\n" +
-            "  Para mas informacion lista las opciones que tiene el usuario. Y el usuario deberia mandarte las opciones que desea.\n";
+            "  Para mas informacion lista las opciones que tiene el usuario. Y el usuario deberia mandarte las opciones que desea saber.\n";
 
     private final Client client;
     private final GenerateContentConfig config;
